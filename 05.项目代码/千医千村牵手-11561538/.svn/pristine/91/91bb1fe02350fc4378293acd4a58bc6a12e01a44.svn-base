@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="account.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div id="header" class="uh bc-text-head ub bc-head">
+                <div class="nav-btn" id="nav-left">
+                    <div class="fa fa-angle-left fa-2x"></div>
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">我的账户</h1>
+                <div class="nav-btn nav-bt" id="nav-right">
+                </div>
+        </div>
+        <div class="balance"><div>账户余额：</div><div id="balance">0</div>元</div>
+        
+        <div id="listview"  class="ubt bc-border sc-bg">
+            <table class="accounttable" id="list">
+                <thead>
+                    <th style="width: 30%">日期</th>
+                    <th style="width: 50%">项目</th>
+                    <th style="width: 20%">金额</th>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/config.js"></script>
+ </body>
+    <script>
+        window.uexOnload = function() {
+            initAccount();
+            var balance = appcan.locStorage.val("balance");
+            $('#balance').text(balance);
+        }
+        function initAccount(){
+        var user_id = appcan.locStorage.val("user_id");
+        appcan.request.ajax({
+                url : SERVER+'QueryAccount',
+                type : 'POST',
+                data : {
+                    "user_id" : user_id
+                },
+                dataType : "json",
+                success : function(data) {
+                    
+                    if (data.error == null) {
+                        var c;
+                        var record;
+                        for(var i=0;i<data.length;i++){
+                            if(i%2==1){
+                                c = "oddrowcolor";
+                            }else{
+                                c = "evenrowcolor";
+                            }
+                            record = "<tr class=\""+c+"\" id=\""+data[i].record_id+"\" onclick=\"showDetail(this)\"><td>"+
+                                    data[i].date+"</td>"+
+                                    "<td>"+data[i].order_name+"</td><td>"+data[i].money+"</td></tr>";
+                            $('#list').append(record);
+                        }
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error : function(errMessage) {
+                    alert("查询失败" + errMessage);
+                }
+            });
+    }
+        appcan.button(".nav-btn", "btn-act", function() {
+            appcan.window.close(-1);
+        })
+
+ </script>
+</html>

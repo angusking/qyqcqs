@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">        
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="ub-f1">
+            <div class="uinput ub ub-f1  bc-border uba srh-cs">                
+                 <div class="uinn fa fa-search sc-text"></div>
+                 <input placeholder="搜索" type="search" class="ub-f1">
+            </div>
+        </div>
+        <div class="ub-f1 uinput ub ub-f1">      
+            <div class="" id='list'>              
+            </div>
+        </div>
+</body>
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+    <script src="wgtRes/emojicons/emojson.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+            var chatinfo=appcan.locStorage.val("chatinfo");
+            mychat(chatinfo);
+        });
+function queryPerson(user_id) {
+  appcan.request.ajax({
+                url : 'http://101.201.47.110:8080/qyqcqs/servlet/QueryPerson',
+                type : 'POST',
+                data : {
+                    "user_id" : user_id
+                },
+                dataType : "json",
+                success : function(data) {
+                    if (data.error == null) {
+                        var s = "#"+user_id;
+                        $(s).text(data.user_name);
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error : function(errMessage) {
+                    alert("获取失败" + errMessage);
+                }
+            });
+        };
+function mychat(str){
+    var json=eval(str);
+    var html="";
+    for (var i = 0; i < json.length; i++) {  
+        if(json[i].unreadMsgCount>0){ 
+            if(json[i].isGroup==1){
+                html+="<div class='ub-f1 ub bc-border uba srh-cs unread-box' onclick=chat1('"+json[i].chatter+"','"+json[i].groupName+"'); > ";
+                html+="<img class='chat-img' src='css/res/ichat-alt.png' width='70' height='65' />";
+                html+="<div class='chat-text'>";
+                html+="<p class='ulev1'>";
+                html+=json[i].groupName;
+                html+="<sup class='chat-sup'>";
+                html+=json[i].unreadMsgCount;//获取未读消息
+                html+="</sup>";            
+                html+="</p>";
+                html+="<p class='chat-font ulev3'>";
+                if(json[i].lastMsg.messageType=="text"){
+                    html+=json[i].lastMsg.messageBody.text;
+                }
+                if(json[i].lastMsg.messageType=="audio"){
+                    html+="[语音]";
+                }
+                if(json[i].lastMsg.messageType=="image"){
+                    html+="[图片]";
+                }
+                if(json[i].lastMsg.messageType == 'file'){
+                    html+="[文件]";               
+                }
+                if(json[i].lastMsg.messageType == 'location'){
+                    html+="[地址]";               
+                }
+                html+="</p>";            
+                html+="</div>";
+                html+="</div>";
+            } 
+            if(json[i].isGroup==0){
+                //根据id查询系统中名称
+                queryPerson(json[i].chatter);
+                
+                html+="<div class='ub-f1 ub bc-border uba srh-cs unread-box' onclick=chat2('"+json[i].chatter+"'); > ";
+                html+="<img class='chat-img' src='css/res/ichat-alt.png' width='70' height='65' />";
+                html+="<div class='chat-text'>";
+                html+="<p class='ulev1' id='"+json[i].chatter+"'>";
+                html+="";
+                html+="<sup class='chat-sup'>";
+                html+=json[i].unreadMsgCount;//获取未读消息
+                html+="</sup>";            
+                html+="</p>";
+                html+="<p class='chat-font ulev3'>";
+                if(json[i].lastMsg.messageType=="text"){
+                    html+=json[i].lastMsg.messageBody.text;
+                }
+                if(json[i].lastMsg.messageType=="audio"){
+                    html+="[语音]";
+                }
+                if(json[i].lastMsg.messageType=="image"){
+                    html+="[图片]";
+                }
+                if(json[i].lastMsg.messageType == 'file'){
+                    html+="[文件]";               
+                }
+                if(json[i].lastMsg.messageType == 'location'){
+                    html+="[地址]";               
+                }
+                html+="</p>";            
+                html+="</div>";
+                html+="</div>";
+            }            
+        }else{
+            if(json[i].isGroup==1){
+                html+="<div class='ub-f1 ub bc-border uba srh-cs unread-box' onclick=chat1('"+json[i].chatter+"','"+json[i].groupName+"'); > ";
+                html+="<img class='chat-img' src='css/res/ichat-alt.png' width='70' height='65' />";
+                html+="<div class='chat-text'>";
+                html+="<p class='ulev1'>";
+                html+=json[i].groupName;
+                html+="<sup class='chat-sup'>";
+                //html+=json[i].unreadMsgCount;//获取未读消息
+                html+="</sup>";            
+                html+="</p>";
+                html+="<p class='chat-font ulev3'>";
+                if(json[i].lastMsg.messageType=="text"){
+                    html+=json[i].lastMsg.messageBody.text;
+                }
+                if(json[i].lastMsg.messageType=="audio"){
+                    html+="[语音]";
+                }
+                if(json[i].lastMsg.messageType=="image"){
+                    html+="[图片]";
+                }
+                if(json[i].lastMsg.messageType == 'file'){
+                    html+="[文件]";               
+                }
+                if(json[i].lastMsg.messageType == 'location'){
+                    html+="[地址]";               
+                }
+                html+="</p>";            
+                html+="</div>";
+                html+="</div>";
+            } 
+            if(json[i].isGroup==0){
+                //查询系统中用户名称
+                var name = queryPerson(json[i].chatter);
+                //alert(name.user_name);
+                html+="<div class='ub-f1 ub bc-border uba srh-cs unread-box' onclick=chat2('"+json[i].chatter+"'); > ";
+                html+="<img class='chat-img' src='css/res/ichat-alt.png' width='70' height='65' />";
+                html+="<div class='chat-text'>";
+                html+="<p class='ulev1' id='"+json[i].chatter+"'>";
+                html+="";
+                html+="<sup class='chat-sup'>";
+                //html+=json[i].unreadMsgCount;//获取未读消息
+                html+="</sup>";            
+                html+="</p>";
+                html+="<p class='chat-font ulev3'>";
+                if(json[i].lastMsg.messageType=="text"){
+                    html+=json[i].lastMsg.messageBody.text;
+                }
+                if(json[i].lastMsg.messageType=="audio"){
+                    html+="[语音]";
+                }
+                if(json[i].lastMsg.messageType=="image"){
+                    html+="[图片]";
+                }
+                if(json[i].lastMsg.messageType == 'file'){
+                    html+="[文件]";               
+                }
+                if(json[i].lastMsg.messageType == 'location'){
+                    html+="[地址]";               
+                }
+                html+="</p>";            
+                html+="</div>";
+                html+="</div>";
+            }            
+        }
+    }
+    $('#list').append(html);
+}
+function chat1(id,name){
+    appcan.locStorage.setVal('groupid',id);
+    appcan.locStorage.setVal('chatname',name);
+    appcan.window.open({
+        name : 'chat',
+        data : 'chatroom.html'
+    })
+    uexEasemob.resetUnreadMsgCount('{"username":"'+id+'","chatType":"1"}');//设置0
+    history.go(0);
+}
+function chat2(name){
+    appcan.locStorage.setVal('chatname',name);
+    appcan.window.open({
+        name : 'chat',
+        data : 'Chatboard.html'
+    })
+    uexEasemob.resetUnreadMsgCount('{"username":"'+name+'","chatType":"0"}');//设置0
+    history.go(0);
+    }
+    </script>
+</html>

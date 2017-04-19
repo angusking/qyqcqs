@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+         <div class="ub-f1">
+            <br>
+            <div id="" class="title-cs">
+                新消息提醒
+            </div>
+            <div id="listview1" class="ubr ubl ubt bc-border"></div>
+            <br>
+            <div id="" class="title-cs">
+                聊天设置
+            </div>
+            <div id="listview2" class="ubr ubl ubt bc-border"></div>
+            <br>
+            <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="btn">
+                                            退出登录
+            </div>
+        </div>
+
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+   <script src="js/appcan.listview.js"></script>
+ </body>
+    <script>
+        appcan.ready(function() {
+            appcan.initBounce();
+        })
+        
+         var lv = appcan.listview({
+            selector : "#listview1",
+            type : "thinLine",
+            hasAngle : true,
+            hasControl : true,
+            hasSubTitle : true
+        });
+        lv.set([{
+            title : "声音",
+            switchBtn : {
+                mini : true,
+                value : true
+            }
+        }, {
+            title : "震动",
+            switchBtn : {
+                mini : true,
+                value : true
+            }
+        }]);
+        
+        var lv1 = appcan.listview({
+            selector : "#listview2",
+            type : "thinLine",
+            hasAngle : false,
+            hasControl : true,
+            hasSubTitle : true
+        });
+        lv1.set([ {
+            title : "使用扬声器播放语音",
+            switchBtn : {
+                mini : true,
+                value : true
+            }
+        },{
+            title : "通讯录黑名单",
+        },{
+            title : "诊断",
+        },{
+            title : "允许聊天室群主离开",
+            switchBtn : {
+                mini : true,
+                value : true
+            }
+        }]);
+appcan.button(".btn", "ani-act", function() {
+      uexEasemob.logout('');        
+})
+
+ </script>
+</html>

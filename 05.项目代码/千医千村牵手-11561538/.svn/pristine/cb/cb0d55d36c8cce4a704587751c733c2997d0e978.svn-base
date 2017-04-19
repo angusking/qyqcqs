@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="order.css">
+
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div id="header" class="bc-text-head ub bc-head">
+            <div class="uh bc-text-head ub bc-head" id="header1">
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">订单详情</h1>
+            </div>
+        </div>
+        <div>
+            <div class="order_name uba bc-border" id="order_name"></div>
+            <textarea class="order_description uba bc-border" disabled="disabled" id="order_description"></textarea>
+        </div>
+        <!-- 图片等 -->
+        <div>
+            <img src="" class="tcxx" id="pickImage" style="height:200px" />
+        </div>
+        <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="btn">
+            确定接单
+        </div>
+
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    </body>
+    <script>
+        window.uexOnload = function() {
+            var order_id = appcan.locStorage.getVal("order_id");
+            appcan.request.ajax({
+                url : 'http://www.gzbcb.com:8080/qyqcqs/servlet/OrderDetail',
+                type : 'POST',
+                data : {
+                    "order_id" : order_id
+                },
+                dataType : "json",
+                success : function(data) {
+                    if (data.error == null) {
+                        $('#order_name').text(data.order_name);
+                        $('#order_description').val(data.order_description);
+                        var src = "http://www.gzbcb.com:8080/qyqcqs/upload/"+data.file_id;
+                        $('#pickImage').attr("src",src);
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error : function(errMessage) {
+                    alert(" 获取订单详情失败" + errMessage);
+                }
+            });
+            uexWidgetOne.cbError = function(opCode,errorCode,errorInfo){
+                alert(errorInfo);
+            }
+            appcan.button("#btn", "ani-act", function() {
+                sub();
+            });
+        }
+        function sub() {
+        // var user_id = appcan.locStorage.val("user_id");
+        // var dis_type = $('#dis_type').val();
+        // var order_name = $('#order_name').val();
+        // var order_description = $('#order_description').val();
+            // appcan.request.ajax({
+                // url : 'http://www.gzbcb.com:8080/qyqcqs/servlet/PostOrder',
+                // type : 'POST',
+                // data : {
+                    // "user_id" : user_id,
+                    // "dis_type" : dis_type,
+                    // "order_name" : order_name,
+                    // "order_description" : order_description
+                // },
+                // dataType : "json",
+                // success : function(data) {
+                    // if (data.error == null) {
+                        // alert(data);
+                    // } else {
+                        // alert(data.msg);
+                    // }
+                // },
+                // error : function(errMessage) {
+                    // alert("发布失败" + errMessage);
+                // }
+            // });
+        }
+
+    </script>
+</html>

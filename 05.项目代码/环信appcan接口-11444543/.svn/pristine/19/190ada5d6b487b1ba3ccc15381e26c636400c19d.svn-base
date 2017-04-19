@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="indexCon_2/css/main.css">
+        <style type="text/css">
+            .hidden {
+                display: none !important;
+            }
+        </style>
+    </head>
+<body class="um-vp bc-bg" ontouchstart>
+    <div id="showuser">
+        <div class="c-gra1 uinn-a1 ub">
+            <div class="ub-f1 ub ub-ver ub-ac ub-pc">
+                <div class="uwh-set3 pos_re">
+                    <div class="uwh-set3 uc-a-set3 ub-img setImg1"></div>
+                    <div class="uwh-set5 c-gra1 ub-a-set4 set-pos ub-ac ub-pc ub">
+                        <div class="uwh-set4 icon-set3 ub-img" onclick="userupdata();"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uinn">
+            <div class="ub ubb b-c2 uinn8">
+                <div class="t-9b ulev-1" style="min-width:5em;">用户 ID</div>
+                <div class="ub-f1 ulev-1" id="userid"></div>
+            </div>
+            <div class="ub ubb b-c2 uinn8">
+                <div class="t-9b ulev-1" style="min-width:5em;">用户名</div>
+                <div class="ub-f1 ulev-1" id="username"></div>
+            </div>
+            <div class="ub ubb b-c2 uinn8">
+                <div class="t-9b ulev-1" style="min-width:5em;">手机</div>
+                <div class="ub-f1 ulev-1" id="usermobile"></div>
+            </div>
+            <div class="ub ubb b-c2 uinn8">
+                <div class="t-9b ulev-1" style="min-width:5em;">性别</div>
+                <div class="ub-f1 ulev-1" id="usersex"></div>
+            </div>
+         </div>
+         <div class="ub-f1">
+            <div id="listview1" class="ubr ubl ubt bc-border"></div>
+            <br>
+            <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="loginout">
+                                            退出登录
+            </div>
+        </div>
+    </div>
+    
+    <div id="userupdata" class="hidden">
+        <div class="c-gra1 uinn-a1 ub">
+            <div class="ub-f1 ub ub-ver ub-ac ub-pc">
+                <div class="uwh-set3 pos_re">
+                    <div class="uwh-set3 uc-a-set3 ub-img setImg1"></div>
+                    <div class="uwh-set5 c-gra1 ub-a-set4 set-pos ub-ac ub-pc ub">
+                        <div class="uwh-set4 icon-set3 ub-img"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uinn">
+            <div class="ub ubb b-c2 uinn8">
+                <div class="t-9b ulev-1" style="min-width:5em;">用户 ID</div>
+                <div class="ub-f1 ulev-1" id="userid1"></div>
+            </div>
+            <div class="ub ubb b-c2 uinn8">
+                <div class="t-9b ulev-1" style="min-width:5em;">用户名</div>
+                <div class="ub-f1 ulev-1" id="username1"></div>
+            </div>
+            <div class="ub ubb b-c2 uinn8">
+                <div class="t-9b ulev-1" style="min-width:5em;">手机</div>
+                <div class="ub-f1 ulev-1">
+                    <input type="text" id="updatamobile" value=""> 
+                </div>
+            </div>
+            <div class="ub ubb b-c2 uinn8">
+                <div class="t-9b ulev-1" style="min-width:5em;">性别</div>
+                <div class="ub-f1 ulev-1">
+                    <input type="text" id="updatasex" value=""> 
+                </div>
+            </div>
+            </br>
+            <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="updata" onclick="updata();">提交修改</div>
+         </div>
+    </div>
+<script src="js/appcan.js"></script>
+<script src="js/appcan.control.js"></script>
+<script src="js/appcan.listview.js"></script>
+</body>
+    <script>
+        var userID=appcan.locStorage.getVal('userId');
+        appcan.ready(function() {
+            var lv = appcan.listview({
+                selector : "#listview1",
+                type : "thinLine",
+                hasAngle : true,
+                hasControl : true,
+                hasSubTitle : true
+            });
+            lv.set([{
+                title : "消息提醒",
+                switchBtn : {
+                    mini : true,
+                    value : true
+                }
+            }, {
+                title : "使用扬声器播放声音",
+                switchBtn : {
+                    mini : true,
+                    value : true
+                }
+            }]);
+            $("#userid").append(userID);
+            $("#userid1").append(userID);
+            appcan.request.ajax({
+                    url : 'http://114.215.145.215:8080/Wowtour/account/get?userID='+userID+'',
+                    type : 'GET',
+                    datatype : 'json',
+                    success : function(data) {
+                        alert("data:"+data);
+                        user=eval('('+data+')');
+                        if (user.status == "200") {
+                            showUser();
+                        }
+                    },
+                    error : function(errMessage) {
+                        var errMessage=eval('('+errMessage+')');
+                        alert("errMessage:"+errMessage);
+                    }
+            });
+        })
+        function showUser(){
+            $("#username").append(user.body.email);
+            $("#username1").append(user.body.email);
+            $("#usermobile").append(user.body.mobile);
+            $("#updatamobile").val(user.body.mobile);
+            if(user.body.sex==1){
+                $("#usersex").append("男");
+                $("#updatasex").val("男");
+            }
+            else {
+                $("#usersex").append("女");
+                $("#updatasex").val("女");
+            }
+        }
+        function userupdata(){
+            $("#showuser").addClass("hidden");
+            $("#userupdata").removeClass("hidden");
+        }
+        function updata(){
+            var usermobile= document.getElementById("updatamobile").value;
+            var usersex= document.getElementById("updatasex").value;
+            appcan.request.ajax({
+                    url : 'http://114.215.145.215:8080/Wowtour/account/updata?id='+userID+'',
+                    type : 'POST',
+                    contentType : 'application/json',
+                    success : function(data) {
+                        alert("data:"+data);
+                        user=eval('('+data+')');
+                        if (user.status == "200") {
+                            alert("信息更新成功！");
+                            history.go(0);
+                        }
+                    },
+                    error : function(errMessage) {
+                        var errMessage=eval('('+errMessage+')');
+                        alert("errMessage:"+errMessage);
+                    }
+            });
+        }
+appcan.button("#loginout", "ani-act", function() {
+      uexEasemob.logout();   
+      appcan.window.open({
+          name : 'load',
+          data : 'load.html'
+      });
+})
+
+ </script>
+</html>

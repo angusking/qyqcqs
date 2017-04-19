@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="order.css">
+
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div id="header" class="uh bc-text-head ub bc-head">
+                <div class="nav-btn" id="nav-left">
+                    <div class="fa fa-angle-left fa-2x"></div>
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">发单</h1>
+                <div class="nav-btn nav-bt" id="nav-right">
+                </div>
+        </div>
+        <div class="select uba bc-border bc-text post_select">
+            <div class="text">
+                科室
+            </div>
+            <div class="icon"></div>
+            <select selectedindex="0" id="dis_type">
+                <option value=1>妇产科</option>
+                <option value=2>内科</option>
+                <option value=3>中医科</option>
+                <option value=4>内分泌科</option>
+                <option value=5>康复科</option>
+                <option value=6>神内科</option>
+                <option value=7>影像</option>
+                <option value=8>神经外科</option>
+                <option value=9>内干科</option>
+                <option value=10>泌尿外科</option>
+                <option value=11>神外科</option>
+                <option value=12>心内科</option>
+                <option value=13>病理、妇科</option>
+                <option value=14>普外科</option>
+                <option value=15>影像科</option>
+                <option value=16>B超</option>
+                <option value=17>神经内科</option>
+                <option value=18>肾病科</option>
+                <option value=19>急诊科</option>
+                <option value=20>骨科</option>
+                <option value=21>医务科</option>
+                <option value=22>眼科</option>
+                <option value=23>皮肤科</option>
+            </select>
+        </div>
+        <div>
+            <input class="order_name uba bc-border" type="text" placeholder="题目" id="order_name"/>
+            <textarea class="order_description uba bc-border" type="text" placeholder="问题描述" id="order_description"></textarea>
+        </div>
+        <!-- 图片等 -->
+        <div>
+            <input class="btn" type="button" value="选择图片" onclick="uexImageBrowser.pickMulti(3);">
+            <!-- <div class="tcxx" id="pickImage" style="height: 200px;"></div> -->
+            <img src="" class="tcxx" id="pickImage" style="height:200px" />
+        </div>
+        <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="btn">
+            提交问题
+        </div>
+
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    </body>
+    <script>
+        var paths;
+        var imgId;
+        window.uexOnload = function() {
+            uexWidgetOne.cbError = function(opCode,errorCode,errorInfo){
+                alert(errorInfo);
+        }
+            uexUploaderMgr.cbCreateUploader = function(opId, dataType, data) {
+                alert(imgId);
+                if (data == 0) {
+                    sub();
+                    alert('上传成功');
+                } else {
+                    alert("上传失败");
+                }
+                uexUploaderMgr.closeUploader(1);
+
+            };
+            uexImageBrowser.cbPick = function(opCode, dataType, data) {
+                //document.getElementById('pickImage').innerHTML = data;
+                $("#pickImage").attr('src', data);
+                paths = data;
+            }
+
+            uexImageBrowser.cbSave = function(opCode, dataType, data) {
+                if (data == 0) {
+                    alert("保存成功!");
+                } else if (data == 1) {
+                    alert("保存失败!");
+                }
+            }
+
+            uexWidgetOne.onError = function(opCode, errorCode, errorDesc) {
+                alert(errorCode + ":" + errorDesc);
+            }
+            appcan.select(".select", function(ele, value) {
+                //alert($('.text').text());
+            });
+            //点击提交按钮
+            appcan.button("#btn", "ani-act", function() {
+            //sub();
+                if (paths) {
+                    imgId = new Date().getTime();
+                    var pos = paths.lastIndexOf(".");
+                    var result = paths.substring(pos);
+                    imgId = imgId+result;
+                    //imgId = appcan.locStorage.val("user_id")+imgId;
+                    uexUploaderMgr.createUploader(1, "http://101.201.47.110:8080/qyqcqs/servlet/UploadFile");
+                    uexUploaderMgr.uploadFile(1, paths, imgId, 0);
+                } else {
+                    sub();
+                }
+            });
+        }
+        function sub() {
+        var user_id = appcan.locStorage.val("user_id");
+        var dis_type = $('#dis_type').val();
+        var order_name = $('#order_name').val();
+        var order_description = $('#order_description').val();
+            appcan.request.ajax({
+                url : 'http://101.201.47.110:8080/qyqcqs/servlet/PostOrder',
+                type : 'POST',
+                data : {
+                    "user_id" : user_id,
+                    "dis_type" : dis_type,
+                    "order_name" : order_name,
+                    "order_description" : order_description,
+                    "file_id":imgId
+                },
+                dataType : "json",
+                success : function(data) {
+                    if (data.error == null) {
+                        alert(data);
+                        $("#btn").hide();
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error : function(errMessage) {
+                    alert("发布失败" + errMessage);
+                }
+            });
+        }
+        appcan.button(".nav-btn", "btn-act", function() {
+            appcan.window.close(-1);
+        })
+    </script>
+</html>

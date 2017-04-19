@@ -1,0 +1,36 @@
+.post_select {
+    width: 50%;
+    margin: 20px;
+}
+.order_name {
+    font-size: 1em;
+    height: 2em;
+    margin-left: 20px;
+    width: 75%;
+}
+.order_description {
+    margin-top: 1em;
+    font-size: 1em;
+    height: 8em;
+    margin-left: 20px;
+    width: 75%;
+    padding: 1px 6px;
+}
+.tcxx {
+    width: 85%;
+    color: #bebdbf;
+    height: 100px;
+    border: 1px dashed #C6C6C6;
+    padding: 1%;
+}
+.btn {
+    margin: 3% 0;
+    background: -webkit-gradient(linear,0 0,0 100%,from(##00A1EA),color-stop(50%,##00A1EA),color-stop(50%,##00A1EA));
+    border: 1px solid #FFA700;
+    display: block;
+    -webkit-border-radius: 8px;
+    text-align: center;
+    padding: 2%;
+    color: ##00A1EA;
+    display: block;
+}

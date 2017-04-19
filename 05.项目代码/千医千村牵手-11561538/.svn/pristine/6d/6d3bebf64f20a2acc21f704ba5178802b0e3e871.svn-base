@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="order.css">
+
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div id="header" class="bc-text-head ub bc-head">
+            <div class="uh bc-text-head ub bc-head" id="header1">
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">咨询单列表</h1>
+            </div>
+        </div>
+        <div class="select uba bc-border bc-text post_select">
+            <div class="text">
+                科室
+            </div>
+            <div class="icon"></div>
+            <select selectedindex="0" id="dis_type">
+                <option value=0>内科</option>
+                <option value=1>外科</option>
+                <option value=2>五官科</option>
+                <option value=3>检验科</option>
+            </select>
+        </div>
+        <div>
+            <table class="ordertable" id="list">
+                <thead>
+                    <th>科室</th>
+                    <th>描述</th>
+                    <th>奖励</th>
+                </thead>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    </body>
+    <script>
+        window.uexOnload = function() {
+            appcan.select(".select", function(ele, value) {
+                var dis_type = $('#dis_type').val();
+                //alert(dis_type);
+                $("#list tbody").html("");
+                getOrderList(dis_type);
+            });
+            getOrderList();
+            
+        }
+        function getOrderList(dis_type){
+            
+            if(dis_type == null || dis_type == undefined){
+                dis_type = "";
+            };
+            alert(dis_type);
+            appcan.request.ajax({
+                url : 'http://www.gzbcb.com:8080/qyqcqs/servlet/QueryOrder',
+                type : 'POST',
+                data : {
+                    "dis_type" : dis_type
+                },
+                dataType : "json",
+                success : function(data) {
+                    var c;
+                    var order;
+                    if (data.error == null) {
+                        for(var i=0;i<data.length;i++){
+                            alert(i);
+                            if(i%2==1){
+                                c = "oddrowcolor";
+                            }else{
+                                c = "evenrowcolor";
+                            }
+                            order = "<tr class=\""+c+"\" id=\""+data[i].order_id+"\" onclick=\"showDetail(this)\"><td>"+
+                                    data[i].disease_type+"</td>"+
+                                    "<td>"+data[i].order_name+"</td><td>10元</td></tr>";
+                            $('#list').append(order);
+                        }
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error : function(errMessage) {
+                    alert("获取失败" + errMessage);
+                }
+            });
+        }
+        function showDetail(e){
+            alert(233);
+            alert($(e).attr("id"));
+        }
+    </script>
+</html>

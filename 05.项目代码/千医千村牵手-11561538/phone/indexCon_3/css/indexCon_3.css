@@ -1,0 +1,17 @@
+.bt{
+    width: 5em;
+    text-align: center;
+    background: #00A1EA;
+    height: 2em;
+    font-size: 2em;
+    line-height: 2em;
+    border: 1px solid;
+    border-color: white;
+    border-radius: 0.25em;
+    margin-bottom: 1em;
+}
+.divzj{
+    margin:auto auto;
+    top:5em;
+    text-align: center;
+}

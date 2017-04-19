@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="order.css">
+
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div id="header" class="bc-text-head ub bc-head">
+            <div class="uh bc-text-head ub bc-head" id="header1">
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">发单</h1>
+            </div>
+        </div>
+        <div class="select uba bc-border bc-text post_select">
+            <div class="text">
+                科室
+            </div>
+            <div class="icon"></div>
+            <select selectedindex="0" id="dis_type">
+                <option value=0>内科</option>
+                <option value=1>外科</option>
+                <option value=2>五官科</option>
+                <option value=3>检验科</option>
+            </select>
+        </div>
+        <div>
+            <input class="order_name uba bc-border" type="text" placeholder="题目" id="order_name"/>
+            <textarea class="order_description uba bc-border" type="text" placeholder="问题描述" id="order_description"></textarea>
+        </div>
+        <!-- 图片等 -->
+        <div>
+            <input class="btn" type="button" value="选择图片" onclick="uexImageBrowser.pickMulti(3);">
+            <!-- <div class="tcxx" id="pickImage" style="height: 200px;"></div> -->
+            <img src="" class="tcxx" id="pickImage" style="height:200px" />
+        </div>
+        <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="btn">
+            提交问题
+        </div>
+
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    </body>
+    <script>
+        var paths;
+        var imgId;
+        window.uexOnload = function() {
+            uexUploaderMgr.cbCreateUploader = function(opId, dataType, data) {
+                alert(imgId);
+                if (data == 0) {
+                    alert('上传成功');
+                } else {
+                    alert("上传失败");
+                }
+                uexUploaderMgr.closeUploader(imgId);
+
+            };
+            uexImageBrowser.cbPick = function(opCode, dataType, data) {
+                //document.getElementById('pickImage').innerHTML = data;
+                $("#pickImage").attr('src', data);
+                paths = data;
+            }
+
+            uexImageBrowser.cbSave = function(opCode, dataType, data) {
+                if (data == 0) {
+                    alert("保存成功!");
+                } else if (data == 1) {
+                    alert("保存失败!");
+                }
+            }
+
+            uexWidgetOne.onError = function(opCode, errorCode, errorDesc) {
+                alert(errorCode + ":" + errorDesc);
+            }
+            appcan.select(".select", function(ele, value) {
+                //alert($('.text').text());
+            });
+            //点击提交按钮
+            appcan.button("#btn", "ani-act", function() {
+
+                alert(paths);
+                if (paths) {
+                    imgId = new Date().getTime();
+                    alert(imgId);
+                    uexUploaderMgr.createUploader(1, 'http://www.gzbcb.com:8080/qyqcqs/servlet/UploadFile');
+                    uexUploaderMgr.uploadFile(imgId, paths, "", 0);
+                } else {
+                    sub();
+                }
+            });
+        }
+        function sub() {
+            // appcan.request.ajax({
+                // url : 'http://www.gzbcb.com:8080/qyqcqs/servlet/Login',
+                // type : 'POST',
+                // data : {
+                    // "loginname" : loginname
+                // },
+                // dataType : "json",
+                // success : function(data) {
+                    // if (data.error == null) {
+                        // appcan.locStorage.setVal('user_id', data.user_id);
+                        // appcan.locStorage.setVal('loginname', loginname);
+                        // var hash = hex_md5(password);
+                        // uexEasemob.login('{"username":"' + data.user_id + '","password":"' + password + '"}');
+                    // } else {
+                        // alert(data.msg);
+                    // }
+                // },
+                // error : function(errMessage) {
+                    // alert("登录失败" + errMessage);
+                // }
+            // });
+        }
+
+    </script>
+</html>

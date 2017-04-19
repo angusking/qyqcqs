@@ -1,0 +1,196 @@
+
+input{
+    color: black;
+    padding: 1px 6px;
+    margin-left:6px;
+}
+.f-sz{
+    font-size: 1.2em;
+}
+.marg{
+    margin-left: 2em;
+}
+.ip-sz{
+    width:8em;
+    padding: .2em 0.9em;
+    min-height: 1.2em;
+    font-size: 1em;    
+}
+.ip-sz1{
+    width:6em;
+    padding: .2em 0.9em;
+    min-height: 1.2em;
+    font-size: 1em;    
+}
+.add-c{
+    
+}
+.title-cs{
+    color: #636363;
+    margin: .2em .8em;
+}
+.srh{
+    width:18em;
+    margin:1.6em 1.2em;
+    min-height: 2.2em;
+    font-size: 1em;   
+    margin:.2em 2em;
+}
+.srh-f{
+    width:12em;
+    margin:1.6em 1.2em 0em 0em;
+    min-height: 2.2em;
+    font-size: 1em;   
+}
+.h-m{
+    margin-bottom: .8em;
+}
+.bg-color{
+    background-color:#E3E3E3;
+}
+.srh-cs{
+    background-color: #FFFFFF;
+    margin:.8em 1.2em;
+}
+.li-cs{
+    background-color: #FFFFFF;
+}
+
+.adf-marg{
+     margin:1.6em 12em .2em 6em;
+}
+.d-mag{
+    margin-left: 1.2em;
+}
+
+/*chatboard*/
+
+.line{
+    padding:.5em;
+    width: 21.5em;
+    height: auto;
+    /*height: 2.5em;*/
+    /*background-color: #FFA500;*/
+}
+.send-msg{
+    width:12em;
+    height: auto;
+    /*height:3em;*/
+    float: right;
+    margin-top: 1.2em;
+    /*background-color:#27A73F;*/
+}
+.r-user{
+    width:2em;
+    height: 2em;
+    float: right;
+}
+.r-text{
+    padding:.3em .5em;
+    width:8em;
+    height: auto;
+    /*height:1.3em;*/
+    border:.1em #2294C3 solid;
+    border-radius:.5em;
+    background-color:#fff;
+    float: left;  
+    
+}
+
+.receive-msg{
+    width:12em;
+    height: auto;
+    margin-top: 1.2em;
+    /*height:3em;*/
+    float: left;
+    /*background-color:#27A73F;*/
+}
+.receive-msgs{
+    width:13em;
+    height: auto;
+    margin-top: 1.2em;
+    /*height:3em;*/
+    float: left;
+    /*background-color:#27A73F;*/
+}
+.sender-box{
+    width:2.5em;
+    height: 3em;
+    float: left;
+}
+.sender-name{
+    margin-top:-1em;
+}
+.l-users{
+    width:2em;
+    height: 2em;
+    margin-left: .5em;
+}
+.l-user{
+    width:2em;
+    height: 2em;
+    float: left;
+}
+.l-text{
+    padding:.3em .5em;
+    width:8em;
+    height: auto;
+    /*height:1.3em;*/
+    border:.1em #2294C3 solid;
+    border-radius:.5em;
+    background-color:#fff;
+    float: right;  
+    
+}
+
+.chat-height{
+    height: 5.5em;
+    width: 100%;
+    background:#2294C3; 
+}
+
+/*indexCon_0*/
+
+.unread-box{
+    width: 19.6em;
+    height: 3.5em;
+    padding: .3em;
+}
+.chat-img{
+    margin: .7em;
+}
+.chat-text{
+    margin-left: .5em;
+}
+.chat-font{
+    margin-top: .3em;
+    color: #9B9B9B;
+}
+.chat-sup{
+    color: red;
+}
+
+/*news*/
+.news-box{
+    width: 19.6em;
+    height: 3em;
+    padding: .3em;
+}
+.news-img{
+    margin: .5em;
+}
+.news-text{
+    margin-top: .7em;
+    width: 4.5em;
+}
+.news-button{
+    margin-left:3.2em;
+}
+.btns{
+    padding:.4em .7em;    
+    margin: .5em .4em;
+}
+
+
+
+

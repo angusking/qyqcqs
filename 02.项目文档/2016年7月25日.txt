@@ -1,0 +1,11 @@
+1，基础数据维护：医院，科室
+1，医生管理
+2，业务数据查询统计
+3，用户管理，管理员，使用领导
+
+easyui  SSH  
+
+JSON post 
+
+订单表order   用户user 医院hospital 订单详情order_detail  账户account 账户收支记录account_record
+数据字典  疾病名称 职称 学历 

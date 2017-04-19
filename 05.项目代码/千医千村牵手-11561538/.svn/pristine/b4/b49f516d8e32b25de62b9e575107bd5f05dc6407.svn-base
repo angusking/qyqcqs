@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="pingjia_content/css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div id="header" class="bc-text-head ub bc-head">
+            <div class="uh bc-text-head ub bc-head" id="header1">
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">当前订单</h1>
+            </div>
+        </div>
+        <div class="uinn-a1">
+            <div class="ub">
+                <div class="ub ub-ver ub-f1">
+                    <!-- <div class="t-bla ulev-1" style="display:flex;">
+                        <div>高老庄</div>&nbsp;&nbsp;&nbsp;
+                        <div>张医生</div>
+                    </div> -->
+                    <div id="order_id" style="display: none;">333s</div>
+                    <div class="ulev-app1 sc-text-warn ufm1" id="order_name">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="ub ub-ac umar-at1">
+                <div class="t-gra-82 ulev-4">
+                    整体评价
+                </div>
+                <div class="ub-f1 umar-l-ec">
+                    <div class="pos_re uwh-ec2">
+                        <div class="ub ub-ac uwh-ec2" id="evaluation_level">
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="umar-t-ec2">
+                <div class="triangle3 umar-l-ec2"></div>
+                <div class="c-wh uinn-ec1 uh-ect">
+                    <div class=" uinput ub ub-f1">
+                        <textarea placeholder="您的评价对其他人有很大帮助哦！" type="text" class="ub-f1" id="evaluation_detail"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="ub ub-ac umar-at2">
+                <div class="t-gra-82 ulev-4">
+                    答复速度
+                </div>
+                <div class="ub-f1 umar-l-ec">
+                    <div class="pos_re uwh-ec2">
+                        <div class="ub ub-ac uwh-ec2" id="speed_level">
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ub ub-ac umar-at2">
+                <div class="t-gra-82 ulev-4">
+                    专业程度
+                </div>
+                <div class="ub-f1 umar-l-ec">
+                    <div class="pos_re uwh-ec2">
+                        <div class="ub ub-ac uwh-ec2" id="professional_level">
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ub ub-ac umar-at2">
+                <div class="t-gra-82 ulev-4">
+                    实用程度
+                </div>
+                <div class="ub-f1 umar-l-ec">
+                    <div class="pos_re uwh-ec2">
+                        <div class="ub ub-ac uwh-ec2" id="practical_level">
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                            <img class="uwh-ec3 ub-img umar-ar3" src="pingjia_content/css/myImg/sort2.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="btn">
+            提交评价
+        </div>
+        <script src="../js/appcan.js"></script>
+        <script src="../js/appcan.control.js"></script>
+        <script src="../js/appcan.listview.js"></script>
+        <script src="../js/config.js"></script>
+    </body>
+    <script>
+    var evaluation_level;
+    var evaluation_detail;
+    var speed_level;
+    var professional_level;
+    var practical_level;
+        appcan.ready(function() {
+            initOrder();
+            appcan.initBounce();
+            $("img").on('click',function(){
+                var s = $(this).parent();
+                var level = $(this).index();
+                if(s[0].id == 'evaluation_level') evaluation_level=level+1;
+                if(s[0].id == 'speed_level') speed_level=level+1;
+                if(s[0].id == 'professional_level') professional_level=level+1;
+                if(s[0].id == 'practical_level') practical_level=level+1;
+                //因为不支持jquery部分方法，此处采用原生js
+                var p = s[0].getElementsByTagName("img");
+                for(var i=0;i<=4;i++){//先重置
+                    p[i].src="pingjia_content/css/myImg/sort2.png";
+                }
+                for(var i=0;i<=level;i++){//根据点击进行填充
+                    p[i].src="pingjia_content/css/myImg/sort1.png";
+                }
+            });
+            appcan.button("#btn", "ani-act", function() {
+                sub();
+            });
+        });
+    function sub(){
+        var order_id = $("#order_id").text();
+        var user_id = appcan.locStorage.val("user_id");
+        evaluation_detail = $("#evaluation_detail").val();
+        appcan.request.ajax({
+                url : SERVER+'EvaluateOrder',
+                type : 'POST',
+                data : {
+                    "user_id" : user_id,
+                    "order_id":order_id,
+                    "evaluation_level":evaluation_level,
+                    "evaluation_detail":evaluation_detail,
+                    "speed_level":speed_level,
+                    "professional_level":professional_level,
+                    "practical_level":practical_level
+                },
+                dataType : "json",
+                success : function(data) {
+                    if (data.error == null) {
+                        alert(data.msg);
+                        $("#btn").hide();
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error : function(errMessage) {
+                    alert("操作失败" + errMessage);
+                }
+            });
+    }
+    function initOrder(){
+        var user_id = appcan.locStorage.val("user_id");
+        appcan.request.ajax({
+                url : SERVER+'QueryCurrentOrder',
+                type : 'POST',
+                data : {
+                    "user_id" : user_id
+                },
+                dataType : "json",
+                success : function(data) {
+                    if (data.error == null) {
+                        $("#order_name").text(data.order_name);
+                        $("#order_id").text(data.order_id);
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error : function(errMessage) {
+                    alert("接单失败" + errMessage);
+                }
+            });
+    }
+    </script>
+</html>

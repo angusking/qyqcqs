@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="ub-f1">
+            <div class="uinput ub ub-f1  bc-border uba srh-cs">                
+                 <div class="uinn fa fa-search sc-text"></div>
+                 <input placeholder="搜索" type="search" class="ub-f1">                 
+            </div>
+            <div id="listview"  class="ubt bc-border sc-bg li-cs">
+            </div>
+            <div id="friendslist" class="ubt bc-border sc-bg bc-text">
+                    
+            </div>
+
+
+        </div>
+                    
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+   <script src="js/appcan.listview.js"></script>
+ </body>
+    <script>
+          appcan.ready(function() {           
+            // var aname = eval(appcan.locStorage.val("contactInvited"));
+            var myId=appcan.locStorage.val("user_id");
+            var user_name=appcan.locStorage.val("username");
+//            uexEasemob.getContactUserNames();
+            alert(user_name);
+                appcan.request.ajax({
+                    url : 'http://www.gzbcb.com:8080/qyqcqs/servlet/GetFriends',
+                    type : 'POST',
+                    data : {
+                        "user_id" : myId
+                    },
+                    dataType : "json",
+                    timeout : 3000, //超时时间
+                    success : function(data) {
+                        showFriendList(data);   
+                    },
+                    error : function(errMessage) {
+                        alert("errMessage"+json.error+json.msg);                     
+                    }
+                });   
+        });
+       
+            function showFriendList(json){             
+                // var jsons=json.body.friends;
+                var lv2 = appcan.listview({
+                    selector : "#friendslist",
+                    type : "thickLine",
+                    hasIcon : true,
+                    hasAngle : true,
+                    hasSubTitle : true,
+                    multiLine : 1
+                });
+                alert(json);
+                var datalist =new Array();
+                for (var i = 0; i < json.length; i++) {
+                    var title=new Array();
+                    title["title"]=json[i].user_name;
+                    title["subTitle"]=json[i].hospital_name;
+                    title["id"]=json[i].hospital_name;
+                    datalist.push(title);  
+                }
+                lv2.set(datalist);
+                
+                lv2.on("click", function(ele, obj, curEle) {
+                    openDetail(obj.title);
+                    appcan.locStorage.setVal('chatname',obj.title);                    
+                    appcan.locStorage.setVal('chatId',obj.id);
+                })
+            }
+
+        function openDetail(id) {
+            appcan.window.open({
+                name : 'Chatboard',
+                data : 'Chatboard.html'
+            }) 
+        }
+          
+        
+   var lv = appcan.listview({
+    selector : "#listview",
+    type : "thinLine",
+    hasIcon : true,
+    hasAngle : false,
+    hasSubTitle : false,
+     multiLine : 1
+});
+lv.set([{
+    title : '<div class="ub">通知</div>',
+    icon:"./css/res/ichat-alt.png",
+    pagename : "news",
+    pageurl:"indexCon_1/news.html"
+}, {
+    title : "群聊",
+    icon:"./css/res/users.png",
+    pagename : "group",
+    pageurl:"indexCon_1/group.html"    
+}])
+lv.on("click",function(ele, context, obj, subobj){
+   // appcan.openWinWithUrl(context.name,context.name+'.html');
+    appcan.window.open(context.pagename,context.pageurl,10);
+})
+
+ </script>
+</html>

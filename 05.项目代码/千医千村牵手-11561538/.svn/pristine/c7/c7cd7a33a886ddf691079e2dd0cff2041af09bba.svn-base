@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <!--header开始-->
+            <div id="header" class="uh bc-text-head ub bc-head">
+                <div class="nav-btn" id="nav-left"></div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">AppCan.Easemob</h1>
+                <div class="nav-btn" id="nav-right">
+                    <!--按钮开始-->
+
+                    <!--按钮结束-->
+                </div>
+            </div></br></br></br>
+            <!--header结束--><!--content开始-->
+      <div class="f-sz marg"><span>用户名：</span><input class="bc-text ub-pc ip-sz" id="loginname" type="text"></div></br>
+   <div class="f-sz marg"><span>密&nbsp;&nbsp;&nbsp;码：</span> <input class="bc-text ub-pc ip-sz" id="loginpassword"  type='password'></div></br></br>
+        
+<div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="btn1">
+	登录
+</div></br>
+
+<!-- <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="btn2">
+    注册
+</div> -->
+<script src="js/zy_control.js">
+    </script>
+    <script src="js/main.js">
+    </script>
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+        <script src="js/md5.js"></script>
+</body>
+    <script>
+    var aname=new Array();
+      appcan.ready(function(){
+         uexWidgetOne.cleanCache();
+         var appKey ="angusking#jiankangtaiyuan";
+         var isAutoLoginEnabled = "1";
+         //是否开启自动登录功能 1-开启 2-关闭                
+                
+                //***TEST***
+                uexEasemob.cbInit= function(data){
+                    //alert('cbInit:'+data);
+                }           
+
+                 //[1.10]
+                 uexEasemob.onConnected= function(data){
+                     //alert('onConnected');
+                 }
+                 
+                 //[1.11]
+                 uexEasemob.onDisconnected= function(data){
+                     //alert('onDisconnected:'+data);
+                 }
+                
+                 uexEasemob.cbLogin= function(data){
+                     var data=eval('('+data+')');
+                     if(data.result==1){
+                         appcan.openWinWithUrl('index','index.html');
+                         uexEasemob.getContactUserNames();                           
+                         uexEasemob.getChatterInfo();
+                         uexEasemob.getGroupsFromServer('{"loadCache":"false"}');                          
+                        uexEasemob.getAllPublicGroupsFromServer('{"pageSize":20,"cursor":""}');                      
+                      }else{
+                          alert(data.msg);
+                      }
+                     
+                 }
+                 
+                 uexEasemob.cbRegisterUser= function(data){               
+                         //alert("cbRegisterUser:"+data); 
+                         var data=eval('('+data+')');
+                         if(data.result==1){
+                            alert("注册成功！");
+                            appcan.openWinWithUrl('load','load.html');
+                         }else{
+                             alert(data.msg);
+                       }              
+                 }
+        
+//uexEasemob.initEasemob('{"appKey":"'+appKey+'","isAutoLoginEnabled":"'+isAutoLoginEnabled+'","debug":"1"}');     
+          uexEasemob.initEasemob('{"appKey":"'+appKey+'","isAutoLoginEnabled":"'+isAutoLoginEnabled+'"}');
+               
+                  var param = {
+                    
+                    enable:1,//0-关闭，1-开启。默认为1 开启新消息提醒
+                    soundEnable:1,// 0-关闭，1-开启。默认为1 开启声音提醒
+                    vibrateEnable:1,// 0-关闭，1-开启。默认为1 开启震动提醒
+                    userSpeaker:1,// 0-关闭，1-开启。默认为1 开启扬声器播放（仅Android可用）
+                    showNotificationInBackgroud:1,// 0-关闭，1-开启。默认为1。设置后台接收新消息时是否通过通知栏提示 （仅Android可用）
+                    acceptInvitationAlways:0,// 0-关闭，1-开启。默认添加好友时为1，是不需要验证的，改成需要验证为0（仅Android可用）
+                    deliveryNotification:1// 0-关闭 1-开启  默认为1 开启消息送达通知   （仅iOS可用）
+                    } 
+                var  params=JSON.stringify(param);
+                uexEasemob.setNotifyBySoundAndVibrate(params);//消息提醒相关配置
+              
+                 //[2.1]
+                 uexEasemob.onNewMessage= function(data){//收到新消息监听
+                     //alert('onNewMessage:'+data);  
+                     var s = "alert(\""+data+"\")";  
+                     uexWindow.evaluateScript("index", 0, s);                   
+                     appcan.locStorage.setVal('receiveMsg',data);
+                    uexWindow.evaluateScript("Chatboard", 0, "newMessage()");
+                    uexWindow.evaluateScript("chatroom", 0, "newMessage()");
+                 }
+                 //[2.2]
+                 uexEasemob.onCmdMessageReceive= function(data){//透传消息监听
+                     // var s = "alert(2"+data.messageBody+")";  
+                     // uexWindow.evaluateScript("index", 0, "alert(2)"); 
+                     //alert('onCmdMessageReceive:'+data);
+                 }
+                 
+                 //[2.3]
+                 uexEasemob.onAckMessage= function(data){//消息已读监听
+                     //alert('onAckMessage:'+data);
+                 }
+                 
+                 //[2.4]
+                 uexEasemob.onDeliveryMessage= function(data){//消息送达监听
+                     //alert('onDeliveryMessage:'+data);
+                 }
+                 
+                 //[2.13]
+                 uexEasemob.cbGetMessageById= function(data){
+                     //alert('cbGetMessageById:'+data);
+                 }
+                 
+                 //[3.16]
+                 uexEasemob.cbGetChatterInfo= function(data){
+                     // alert('cbGetChatterInfo:'+data);
+                     appcan.locStorage.setVal('chatinfo',data);
+                 }
+                 
+                  uexEasemob.cbGetMessageHistory= function(data){
+                     //alert('cbGetMessageHistory:'+data);
+                     appcan.locStorage.setVal('historyMsg',data);
+                 };
+
+                 //[4.1]      
+                 uexEasemob.onContactInvited= function(data){//接到好友申请
+                     // alert('onContactInvited:'+data);   
+                     uexWindow.evaluateScript("index", 0, "alert(2);"); 
+                     var data=eval('('+data+')');
+                     aname.push(data.username);
+                     appcan.locStorage.setVal('contactInvited',aname);
+                      
+                 }
+                 
+                 uexEasemob.onContactAdded= function(data){//新增联系人监听（仅Android）          
+                     //alert('onContactAdded:'+data);                     
+                 }                 
+                 
+                 //[4.2]
+                 uexEasemob.onContactDeleted= function(data){//删除联系人监听（仅Android）
+                     //alert('onContactDeleted:'+data);
+                 }
+                                  
+                 //[4.4]
+                 uexEasemob.onContactAgreed= function(data){//好友请求被同意
+                     //alert('onContactAgreed:'+data);
+                 }
+                 
+                 //[4.5]
+                 uexEasemob.onContactRefused= function(data){//好友请求被拒绝
+                     //alert('onContactRefused:'+data);
+                 }
+                 
+                 //[4.7]
+                 uexEasemob.cbGetContactUserNames=function(data){ //获取好友列表回调
+                     //alert('cbGetContactUserNames:'+data);
+                     //var s = "alert(\""+data+"\")";  
+                     //uexWindow.evaluateScript("index", 0, s);  
+                     appcan.locStorage.setVal('friends',data); 
+                 }
+                 
+                 //[4.13]
+                 uexEasemob.cbGetBlackListUsernames= function(data){
+                     //alert('cbGetBlackListUsernames:'+data);
+                 }
+                 
+                 uexEasemob.cbGetGroupsFromServer= function(data){//从服务器获取自己加入的和创建的群聊列表回调    
+                     //alert('grouplist:'+data);
+                     appcan.locStorage.setVal('grouplist',data);
+                 }
+                 
+                 uexEasemob.cbGetAllPublicGroupsFromServer=function(data){//获取所有公开群列表回调 
+                     //alert('opengroup:'+data);
+                     appcan.locStorage.setVal('opengroup',data);
+                 }
+                 uexEasemob.cbGetGroup=function(data){//获取单个群聊信息回调 
+                     //alert('searchgroup:'+data);
+                     appcan.locStorage.setVal('searchgroup',data);
+                 }
+    })
+     
+   appcan.button(".btn", "ani-act", function() {   
+       var loginname = document.getElementById("loginname").value;
+       var password = document.getElementById("loginpassword").value;  
+       switch(this.id) {
+            case "btn1":                 
+                appcan.request.ajax({
+                    url : 'http://www.gzbcb.com:8080/qyqcqs/servlet/Login',
+                    type : 'POST',
+                    data : {
+                      "loginname" : loginname
+                    },
+                    dataType : "json",
+                    success : function(data) {
+                        if(data.error==null){
+                        appcan.locStorage.setVal('user_id',data.user_id);
+                        appcan.locStorage.setVal('loginname',loginname);
+                        var hash = hex_md5(password);
+                        uexEasemob.login('{"username":"'+data.user_id+'","password":"'+password+'"}'); 
+                        }else{
+                            alert(data.msg);
+                        }
+                    },
+                    error : function(errMessage) {
+                        alert("errMessage"+errMessage);
+                    }
+                });   
+                // uexEasemob.login('{"username":"'+'test'+'","password":"'+'1'+'"}');   
+                // appcan.locStorage.setVal('username',username);
+                break;
+            case "btn2":
+                appcan.openWinWithUrl('register','register.html');
+                break;
+            }            
+})
+ </script>
+</html>

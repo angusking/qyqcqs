@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="qyqcqs"
+  id="myeclipse.1471095160794"
+  context-root="/qyqcqs"
+  j2ee-spec="6.0"
+  archive="qyqcqs.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

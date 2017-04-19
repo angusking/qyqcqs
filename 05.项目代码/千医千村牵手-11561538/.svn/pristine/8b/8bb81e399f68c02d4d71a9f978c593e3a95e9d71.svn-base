@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="order.css">
+
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div id="header" class="uh bc-text-head ub bc-head">
+                <div class="nav-btn" id="nav-left">
+                    <div class="fa fa-angle-left fa-2x"></div>
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">咨询单列表</h1>
+                <div class="nav-btn nav-bt" id="nav-right">
+                </div>
+        </div>
+        <div class="select uba bc-border bc-text post_select">
+            <div class="text">
+                科室
+            </div>
+            <div class="icon"></div>
+            <select selectedindex="0" id="dis_type">
+                <option value=1>妇产科</option>
+                <option value=2>内科</option>
+                <option value=3>中医科</option>
+                <option value=4>内分泌科</option>
+                <option value=5>康复科</option>
+                <option value=6>神内科</option>
+                <option value=7>影像</option>
+                <option value=8>神经外科</option>
+                <option value=9>内干科</option>
+                <option value=10>泌尿外科</option>
+                <option value=11>神外科</option>
+                <option value=12>心内科</option>
+                <option value=13>病理、妇科</option>
+                <option value=14>普外科</option>
+                <option value=15>影像科</option>
+                <option value=16>B超</option>
+                <option value=17>神经内科</option>
+                <option value=18>肾病科</option>
+                <option value=19>急诊科</option>
+                <option value=20>骨科</option>
+                <option value=21>医务科</option>
+                <option value=22>眼科</option>
+                <option value=23>皮肤科</option>
+            </select>
+        </div>
+        <div>
+            <table class="ordertable" id="list">
+                <thead>
+                    <th>科室</th>
+                    <th>描述</th>
+                    <th>奖励</th>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/config.js"></script>
+    </body>
+    <script>
+        window.uexOnload = function() {
+            appcan.select(".select", function(ele, value) {
+                var dis_type = $('#dis_type').val();
+                //alert(dis_type);              
+                getOrderList(dis_type);
+            });
+            getOrderList();
+            
+        }
+        function getOrderList(dis_type){
+            $(".oddrowcolor,.evenrowcolor").empty();
+            if(dis_type == null || dis_type == undefined){
+                dis_type = "";
+            };
+            appcan.request.ajax({
+                url : SERVER+'QueryOrder',
+                type : 'POST',
+                data : {
+                    "dis_type" : dis_type
+                },
+                dataType : "json",
+                success : function(data) {
+                    var c;
+                    var order;
+                    if (data.error == null) {
+                        for(var i=0;i<data.length;i++){
+                            if(i%2==1){
+                                c = "oddrowcolor";
+                            }else{
+                                c = "evenrowcolor";
+                            }
+                            order = "<tr class=\""+c+"\" id=\""+data[i].order_id+"\" onclick=\"showDetail(this)\"><td>"+
+                                    data[i].disease_type+"</td>"+
+                                    "<td>"+data[i].order_name+"</td><td>10元</td></tr>";
+                            $('#list').append(order);
+                        }
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error : function(errMessage) {
+                    alert("获取失败" + errMessage);
+                }
+            });
+        }
+        function showDetail(e){
+            appcan.locStorage.setVal("order_id",$(e).attr("id"));
+            appcan.openWinWithUrl('detail','Detail.html');
+        }
+        appcan.button(".nav-btn", "btn-act", function() {
+            appcan.window.close(-1);
+        })
+    </script>
+</html>

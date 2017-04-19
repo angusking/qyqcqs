@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name></display-name>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>Register</servlet-name>
+		<servlet-class>com.qyqcqs.Mobile.Register</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>GetFriends</servlet-name>
+		<servlet-class>com.qyqcqs.Mobile.GetFriends</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>com.qyqcqs.Mobile.Login</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>GetUserInfo</servlet-name>
+		<servlet-class>com.qyqcqs.Mobile.GetUserInfo</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>QueryPerson</servlet-name>
+		<servlet-class>com.qyqcqs.Mobile.QueryPerson</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>GetDiseaseType</servlet-name>
+		<servlet-class>com.qyqcqs.Mobile.GetDiseaseType</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>PostOrder</servlet-name>
+		<servlet-class>com.qyqcqs.Mobile.PostOrder</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>UploadFile</servlet-name>
+		<servlet-class>com.qyqcqs.Mobile.UploadFile</servlet-class>
+		<init-param>
+			<param-name>filepath</param-name>
+			<param-value>/uploadFile</param-value>
+		</init-param>
+		<init-param>
+			<param-name>temppath</param-name>
+			<param-value>/temp</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>QueryOrder</servlet-name>
+		<servlet-class>com.qyqcqs.Mobile.QueryOrder</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>OrderDetail</servlet-name>
+		<servlet-class>com.qyqcqs.Mobile.OrderDetail</servlet-class>
+	</servlet>
+  <servlet>
+    <description>医生接单</description>
+    <display-name>医生接单</display-name>
+    <servlet-name>TakeOrder</servlet-name>
+    <servlet-class>com.qyqcqs.Mobile.TakeOrder</servlet-class>
+  </servlet>
+  <servlet>
+    <description>评价订单</description>
+    <display-name>EvaluateOrder</display-name>
+    <servlet-name>EvaluateOrder</servlet-name>
+    <servlet-class>com.qyqcqs.Mobile.EvaluateOrder</servlet-class>
+  </servlet>
+  <servlet>
+    <description>查询当前订单</description>
+    <display-name>QueryCurrentOrder</display-name>
+    <servlet-name>QueryCurrentOrder</servlet-name>
+    <servlet-class>com.qyqcqs.Mobile.QueryCurrentOrder</servlet-class>
+  </servlet>
+  <servlet>
+    <description>查询个人账户</description>
+    <display-name>QueryAccount</display-name>
+    <servlet-name>QueryAccount</servlet-name>
+    <servlet-class>com.qyqcqs.Mobile.QueryAccount</servlet-class>
+  </servlet>
+
+
+
+
+	<servlet-mapping>
+		<servlet-name>Register</servlet-name>
+		<url-pattern>/servlet/Register</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetFriends</servlet-name>
+		<url-pattern>/servlet/GetFriends</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/servlet/Login</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetUserInfo</servlet-name>
+		<url-pattern>/servlet/GetUserInfo</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>QueryPerson</servlet-name>
+		<url-pattern>/servlet/QueryPerson</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetDiseaseType</servlet-name>
+		<url-pattern>/servlet/GetDiseaseType</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PostOrder</servlet-name>
+		<url-pattern>/servlet/PostOrder</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UploadFile</servlet-name>
+		<url-pattern>/servlet/UploadFile</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>QueryOrder</servlet-name>
+		<url-pattern>/servlet/QueryOrder</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OrderDetail</servlet-name>
+		<url-pattern>/servlet/OrderDetail</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TakeOrder</servlet-name>
+    <url-pattern>/servlet/TakeOrder</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EvaluateOrder</servlet-name>
+    <url-pattern>/servlet/EvaluateOrder</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QueryCurrentOrder</servlet-name>
+    <url-pattern>/servlet/QueryCurrentOrder</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QueryAccount</servlet-name>
+    <url-pattern>/servlet/QueryAccount</url-pattern>
+  </servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

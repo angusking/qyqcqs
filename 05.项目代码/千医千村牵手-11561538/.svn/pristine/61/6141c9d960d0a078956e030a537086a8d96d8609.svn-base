@@ -1,0 +1,18 @@
+.post_select{
+    width:50%;
+    margin:20px;
+}
+.order_name{
+    font-size: 1em;
+    height: 2em;
+    margin-left: 20px;
+    width: 75%;
+}
+.order_description{
+    margin-top:1em;
+    font-size: 1em;
+    height: 8em;
+    margin-left: 20px;
+    width: 75%;
+    padding: 1px 6px;
+}

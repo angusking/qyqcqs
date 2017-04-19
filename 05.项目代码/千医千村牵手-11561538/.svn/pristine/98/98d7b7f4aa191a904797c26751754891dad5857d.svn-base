@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="indexCon_3/css/indexCon_3.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="ub-f1">
+            <div class="uinput ub ub-f1  bc-border uba srh-cs">
+                <div class="uinn fa fa-search sc-text"></div>
+                <input placeholder="搜索" type="search" class="ub-f1">
+            </div>
+        </div>
+        <div class="ub-f1 uinput ub ub-f1">
+            <div class="divzj">
+                <div class="bt"  id="gbtn">
+                    接单
+                </div>
+                <div class="bt"  id="pbtn">
+                    发单
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="js/appcan.js"></script>
+    <script src="js/appcan.control.js"></script>
+    <script src="wgtRes/emojicons/emojson.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+            appcan.button(".bt", "ani-act", function() {
+                var id = this.id;
+                if(id=='pbtn'){//打开发单页面
+                    
+                }else{//打开接单页面
+                    
+                }
+            })
+        })
+        
+    </script>
+</html>

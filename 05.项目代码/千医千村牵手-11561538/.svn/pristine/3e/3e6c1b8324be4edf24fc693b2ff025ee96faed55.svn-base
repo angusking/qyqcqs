@@ -1,0 +1,2 @@
+var SERVER = "http://localhost:8080/qyqcqs/servlet/";
+//var SERVER = "http://110.201.47.110:8080/qyqcqs/servlet/";

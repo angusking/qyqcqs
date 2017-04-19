@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="account.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div id="header" class="uh bc-text-head ub bc-head">
+                <div class="nav-btn" id="nav-left">
+                    <div class="fa fa-angle-left fa-2x"></div>
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">我的账户</h1>
+                <div class="nav-btn nav-bt" id="nav-right">
+                </div>
+        </div>
+        <div class="balance"><div>账户余额：</div><div id="balance">0</div>元</div>
+        
+        <div id="listview"  class="ubt bc-border sc-bg">
+</div>
+
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+   <script src="../js/appcan.listview.js"></script>
+ </body>
+    <script>
+        window.uexOnload = function() {
+            
+            
+        }
+        appcan.button(".nav-btn", "btn-act", function() {
+            appcan.window.close(-1);
+        })
+
+var lv = appcan.listview({
+    selector : "#listview",
+    type : "thinLine",
+    hasIcon : false,
+    hasAngle : true,
+    hasSubTitle : true,
+    multiLine : 1,
+});
+lv.set([{
+    title : "回答收入",
+    subTitle:"10元",
+    id:"1"
+}, {
+    title : "提现",
+    subTitle:"50元",
+    id:"2"
+}])
+lv.on("click",function(ele,obj,curEle){
+    // lv.set([
+        // {
+            // title:"233",
+            // subTitle:"123",
+            // id:"1"
+        // }
+    // ])
+})
+ </script>
+</html>

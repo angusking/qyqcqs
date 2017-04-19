@@ -1,0 +1,2 @@
+Client目录为APP端代码；
+Server目录为服务器端代码；
